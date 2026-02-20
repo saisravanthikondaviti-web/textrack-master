@@ -1,0 +1,88 @@
+body {
+  background: #fdf6e3; /* soft traditional beige */
+  font-family: "Segoe UI", sans-serif;
+  color: #222;
+}
+
+.card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 420px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  height: 180px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.card p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+  line-height: 1.2rem;
+}
+
+.card .btn,
+.card a {
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.card .btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.card .btn:hover {
+  background-color: #218838;
+}
+
+.card a {
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+}
+
+.card a:hover {
+  background-color: #0056b3;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.filters button {
+  margin-right: 10px;
+  padding: 7px 12px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.filters button.active {
+  background-color: #007bff;
+  color: white;
+}
