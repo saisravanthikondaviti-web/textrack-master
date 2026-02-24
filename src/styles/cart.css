@@ -1,0 +1,140 @@
+.cart-page {
+  padding: 40px;
+  color: white;
+  min-height: 100vh;
+}
+
+.cart-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+/* Layout */
+.cart-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+/* Empty */
+.cart-empty {
+  text-align: center;
+  padding: 120px 20px;
+  color: #9ca3af;
+}
+
+/* Item Card */
+.cart-card {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  align-items: center;
+}
+
+.cart-card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Info */
+.cart-info {
+  flex: 1;
+}
+
+.cart-category {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.cart-price {
+  font-weight: 600;
+  margin: 6px 0;
+}
+
+/* Quantity */
+.cart-qty {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.cart-qty button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: #22c55e;
+  color: white;
+  cursor: pointer;
+}
+
+/* Actions */
+.cart-actions {
+  text-align: right;
+}
+
+.cart-subtotal {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.remove-btn {
+  background: #ef4444;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Summary */
+.cart-summary {
+  padding: 25px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  height: fit-content;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+
+.summary-total {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #22c55e;
+  color: white;
+  font-weight: 600;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.clear-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: white;
+  margin-top: 10px;
+  cursor: pointer;
+}

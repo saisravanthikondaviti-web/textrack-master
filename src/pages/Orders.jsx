@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { useAuth } from "../context/AuthContext";
+import "../styles/orders.css";
 
 function Orders() {
   const { user } = useAuth();
@@ -30,24 +31,42 @@ function Orders() {
   }, [user]);
 
   return (
-    <div className="container">
-      <h2>My Orders</h2>
+    <div className="orders-container">
+      <h2 className="orders-title">My Orders</h2>
 
       {orders.length === 0 ? (
-        <p>No orders yet</p>
+        <p style={{ textAlign: "center" }}>No orders yet</p>
       ) : (
         orders.map(order => (
-          <div key={order.id} className="card" style={{ marginBottom: "20px" }}>
-            <p><strong>Order ID:</strong> {order.id}</p>
-            <p><strong>Total:</strong> ₹{order.total}</p>
-            <p><strong>Status:</strong> {order.status}</p>
+          <div key={order.id} className="order-card">
 
-            <h4>Items:</h4>
-            {order.items.map(item => (
-              <p key={item.id}>
-                {item.name} × {item.quantity}
-              </p>
-            ))}
+            <div className="order-row">
+              <span>Order ID</span>
+              <span>{order.id}</span>
+            </div>
+
+            <div className="order-row">
+              <span>Total</span>
+              <span>₹{order.total}</span>
+            </div>
+
+            <div className="order-row">
+              <span>Status</span>
+              <span className={`status ${order.status}`}>
+                {order.status}
+              </span>
+            </div>
+
+            <div className="order-items">
+              <strong>Items</strong>
+              {order.items.map(item => (
+                <div key={item.id} className="order-row">
+                  <span>{item.name}</span>
+                  <span>× {item.quantity}</span>
+                </div>
+              ))}
+            </div>
+
           </div>
         ))
       )}

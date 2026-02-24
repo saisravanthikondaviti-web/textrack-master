@@ -1,97 +1,96 @@
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../services/firebase";
-import { useAuth } from "../context/AuthContext";
-import { useCart } from "../context/CartContext";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+import "../styles/cart.css";
 
 function Cart() {
-  const { user } = useAuth();
-
   const {
     cart,
-    increaseQty,
-    decreaseQty,
     removeFromCart,
-    clearCart,
-    totalPrice
-  } = useCart();
+    increaseQuantity,
+    decreaseQuantity,
+    clearCart
+  } = useContext(CartContext);
 
-  // ✅ PLACE ORDER FUNCTION
-const handleCheckout = async () => {
-  if (!user) {
-    alert("Please login to place order");
-    return;
-  }
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   if (cart.length === 0) {
-    alert("Cart is empty");
-    return;
+    return (
+      <div className="cart-empty">
+        <h2>Your Cart is Empty</h2>
+        <p>Add some beautiful fabrics to begin ✨</p>
+      </div>
+    );
   }
-
-  try {
-    await addDoc(collection(db, "orders"), {
-      userId: user.uid,
-      items: cart,
-      total: totalPrice,
-      status: "pending",
-      createdAt: serverTimestamp()
-    });
-
-    alert("Order placed successfully 🎉");
-    clearCart();
-
-  } catch (error) {
-    console.error("Order error:", error);
-    alert("Failed to place order");
-  }
-};
 
   return (
-    <div className="container">
-      <h2>Your Cart</h2>
+    <section className="cart-page">
+      <h2 className="cart-title">Your Cart</h2>
 
-      {cart.length === 0 ? (
-        <p>No items in cart</p>
-      ) : (
-        <>
-          {cart.map(item => (
-            <div key={item.id} className="card" style={{ marginBottom: "15px" }}>
-              <h3>{item.name}</h3>
-              <p>Price: ₹{item.price}</p>
+      <div className="cart-layout">
+        {/* LEFT — ITEMS */}
+        <div className="cart-items">
+          {cart.map((item) => (
+            <div className="cart-card" key={item.id}>
+              <img src={item.image} alt={item.name} />
 
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <button className="btn" onClick={() => decreaseQty(item.id)}>-</button>
-                <span>{item.quantity}</span>
-                <button className="btn" onClick={() => increaseQty(item.id)}>+</button>
+              <div className="cart-info">
+                <h3>{item.name}</h3>
+                <p className="cart-category">{item.category}</p>
+                <p className="cart-price">₹{item.price}</p>
+
+                <div className="cart-qty">
+                  <button onClick={() => decreaseQuantity(item.id)}>
+                    −
+                  </button>
+                  <span>{item.quantity}</span>
+                  <button onClick={() => increaseQuantity(item.id)}>
+                    +
+                  </button>
+                </div>
               </div>
 
-              <p>Subtotal: ₹{item.price * item.quantity}</p>
-
-              <button
-                className="btn"
-                style={{ background: "crimson" }}
-                onClick={() => removeFromCart(item.id)}
-              >
-                Remove
-              </button>
+              <div className="cart-actions">
+                <p className="cart-subtotal">
+                  ₹{item.price * item.quantity}
+                </p>
+                <button
+                  className="remove-btn"
+                  onClick={() => removeFromCart(item.id)}
+                >
+                  Remove
+                </button>
+              </div>
             </div>
           ))}
+        </div>
 
-          <h3>Total: ₹{totalPrice}</h3>
+        {/* RIGHT — SUMMARY */}
+        <div className="cart-summary">
+          <h3>Order Summary</h3>
 
-          <button className="btn" onClick={clearCart}>
+          <div className="summary-row">
+            <span>Items</span>
+            <span>{cart.length}</span>
+          </div>
+
+          <div className="summary-row">
+            <span>Total</span>
+            <span className="summary-total">₹{total}</span>
+          </div>
+
+          <button className="checkout-btn">
+            Proceed to Checkout
+          </button>
+
+          <button className="clear-btn" onClick={clearCart}>
             Clear Cart
           </button>
-
-          <button
-            className="btn"
-            style={{ marginLeft: "10px", background: "green" }}
-            onClick={handleCheckout}
-          >
-            Checkout
-          </button>
-        </>
-      )}
-    </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
