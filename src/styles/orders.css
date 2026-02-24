@@ -1,88 +1,137 @@
 .orders-container {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 20px;
+  padding: 40px;
+  color: white;
 }
 
 .orders-title {
-  text-align: center;
   margin-bottom: 25px;
-  color: #0f172a;
 }
 
-/* 🔥 Card glow + lift effect */
+/* EMPTY STATE */
+.orders-empty {
+  text-align: center;
+  padding: 60px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+}
+
+.empty-icon {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+.shop-btn {
+  margin-top: 20px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(45deg, #00ffae, #00c3ff);
+  color: black;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.shop-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ffae;
+}
+
+/* ORDER CARD */
 .order-card {
-  background: linear-gradient(145deg, #0f172a, #020617);
-  color: white;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
   padding: 20px;
-  border-radius: 14px;
-  margin-bottom: 20px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255,255,255,0.05);
-  box-shadow: 0 0 0 rgba(0,0,0,0);
+  margin-bottom: 25px;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
 }
 
 .order-card:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4),
-              0 0 20px rgba(59,130,246,0.25);
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0,255,174,0.4);
 }
 
-/* ✨ Row hover highlight */
-.order-row {
+/* HEADER */
+.order-header {
   display: flex;
   justify-content: space-between;
-  margin: 8px 0;
-  padding: 6px 8px;
-  border-radius: 6px;
-  transition: background 0.25s ease;
+  align-items: center;
 }
 
-.order-row:hover {
-  background: rgba(255,255,255,0.06);
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-transform: capitalize;
 }
 
-/* 🌈 Items section glow divider */
+.status-badge.pending { background: orange; }
+.status-badge.packed { background: #00c3ff; }
+.status-badge.shipped { background: #007bff; }
+.status-badge.delivered { background: #28a745; }
+
+/* PROGRESS BAR */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  margin: 25px 0;
+}
+
+.progress-step {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.step-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.step-circle.active {
+  background: #00ffae;
+  box-shadow: 0 0 10px #4a8a76;
+}
+
+.step-line {
+  height: 3px;
+  background: gray;
+  flex: 1;
+}
+
+.step-line.active {
+  background: #00ffae;
+}
+
+.step-label {
+  position: absolute;
+  top: 35px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+/* ITEMS */
 .order-items {
   margin-top: 15px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255,255,255,0.1);
 }
 
-/* 💡 Status badges with glow */
-.status {
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: bold;
-  text-transform: capitalize;
-  transition: all 0.3s ease;
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
 }
 
-/* pending */
-.status.pending {
-  background: rgba(251,191,36,0.15);
-  color: #fbbf24;
-  box-shadow: 0 0 8px rgba(251,191,36,0.4);
-}
-
-/* completed */
-.status.completed {
-  background: rgba(34,197,94,0.15);
-  color: #22c55e;
-  box-shadow: 0 0 8px rgba(34,197,94,0.4);
-}
-
-/* cancelled */
-.status.cancelled {
-  background: rgba(239,68,68,0.15);
-  color: #ef4444;
-  box-shadow: 0 0 8px rgba(239,68,68,0.4);
-}
-
-/* 🌊 Smooth page feel */
-.order-card,
-.order-row,
-.status {
-  will-change: transform, box-shadow;
+.order-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
 }
