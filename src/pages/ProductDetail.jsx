@@ -1,6 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../services/firebase";
+import { auth } from "../services/firebase";
 
 function ProductDetail() {
   const { addToCart } = useContext(CartContext);
@@ -38,6 +41,30 @@ function ProductDetail() {
       </div>
     );
   }
+
+  const addToWishlist = async (productId) => {
+  const user = auth.currentUser;
+  if (!user) return alert("Login required");
+
+  const wishlistRef = doc(db, "wishlist", user.uid);
+  const snap = await getDoc(wishlistRef);
+
+  if (!snap.exists()) {
+    await setDoc(wishlistRef, {
+      items: [productId],
+    });
+  } else {
+    const existing = snap.data().items || [];
+
+    if (!existing.includes(productId)) {
+      await updateDoc(wishlistRef, {
+        items: [...existing, productId],
+      });
+    }
+  }
+
+  alert("Added to Wishlist ❤️");
+};
 
   /* ---------- Modal UI ---------- */
   return (

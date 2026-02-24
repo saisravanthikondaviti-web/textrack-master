@@ -66,6 +66,11 @@ function App() {
                 </AdminRoute>
               }
             />
+
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/purchase-summary" element={<PurchaseSummary />} />
           </Routes>
         </BrowserRouter>
       </CartProvider>
