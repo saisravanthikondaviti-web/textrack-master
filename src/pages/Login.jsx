@@ -2,6 +2,7 @@ import { useState } from "react";
 import { auth } from "../services/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
+import "../styles/auth.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -10,17 +11,54 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signInWithEmailAndPassword(auth, email, password);
-    navigate("/products");
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/products");
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
-      <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-      <button>Login</button>
-      <p><Link to="/register">Register</Link></p>
-    </form>
+    <div className="auth-page">
+      <div className="auth-card">
+
+        <h2>Login</h2>
+        <p className="auth-subtitle">
+          Access your textile dashboard
+        </p>
+
+        <form onSubmit={handleSubmit} className="auth-form">
+
+          <div className="input-group">
+            <label>Email</label>
+            <input
+              type="email"
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <button className="auth-btn">Login</button>
+        </form>
+
+        <p className="auth-footer">
+          New user?
+          <Link to="/register"> Register here</Link>
+        </p>
+
+      </div>
+    </div>
   );
 }

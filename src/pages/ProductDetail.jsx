@@ -1,53 +1,48 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 function ProductDetail() {
-  const { addToCart } = useContext(CartContext);
+  const { id } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
+  const { addToCart } = useContext(CartContext);
 
   const product = location.state?.product;
 
-  if (!product)
+  if (!product) {
     return (
-      <p style={{ textAlign: "center", marginTop: "50px" }}>
-        Product not found!
-      </p>
+      <div style={{ textAlign: "center", marginTop: "80px", color: "white" }}>
+        <h2>Product not found</h2>
+        <button onClick={() => navigate("/products")} style={{ marginTop: "20px" }}>
+          Go Back
+        </button>
+      </div>
     );
+  }
 
   return (
-    <div
-      style={{
-        padding: "30px",
-        maxWidth: "900px",
-        margin: "0 auto",
-        background: "#fff7e6",
-        borderRadius: "10px"
-      }}
-    >
-      <img
-        src={product.image}
-        alt={product.name}
-        style={{ width: "100%", height: "400px", objectFit: "cover", borderRadius: "8px" }}
-      />
-      <h2>{product.name}</h2>
-      <p><strong>Category:</strong> {product.category}</p>
-      <p><strong>Price:</strong> ₹{product.price}</p>
-      <p>{product.description}</p>
-      <button
-        onClick={() => addToCart(product)}
-        style={{
-          padding: "10px 15px",
-          backgroundColor: "#28a745",
-          color: "#fff",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-          marginTop: "15px"
-        }}
-      >
-        Add to Cart
-      </button>
+    <div className="popup-overlay" onClick={() => navigate("/products")}>
+      <div className="popup-card" onClick={(e) => e.stopPropagation()}>
+        <button className="close-btn" onClick={() => navigate("/products")}>
+          ✕
+        </button>
+
+        <div className="popup-image">
+          <img src={product.image} alt={product.name} />
+        </div>
+
+        <div className="popup-content">
+          <h2>{product.name}</h2>
+          <p className="category">{product.category}</p>
+          <p className="price">₹{product.price}</p>
+          <p className="description">{product.description}</p>
+
+          <button className="primary-btn" onClick={() => addToCart(product)}>
+            Add to Cart
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

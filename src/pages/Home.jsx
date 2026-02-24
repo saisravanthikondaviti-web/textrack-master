@@ -64,21 +64,46 @@ function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="footer">
-        <div className="footer-container">
-          <h3>TexTrack</h3>
-          <p>Connecting you with the finest textile fabrics.</p>
-          <div className="footer-links">
-            <a href="#hero">Home</a>
-            <Link to="/products">Products</Link>
-            <a href="#about">About</a>
-            <a href="#faq">FAQ</a>
-            <a href="#contact">Contact</a>
-            <Link to="/cart">Cart</Link>
-          </div>
-          <p className="footer-copy">© 2026 TexTrack. All Rights Reserved.</p>
-        </div>
-      </footer>
+     <footer className="footer">
+  <div className="footer-container">
+
+    <div className="footer-brand">
+      <h3>TexTrack</h3>
+      <p>
+        AI-powered textile discovery platform helping you explore premium fabrics
+        with intelligence and style.
+      </p>
+
+      <div className="footer-social">
+        <span>🌐</span>
+        <span>📸</span>
+        <span>💼</span>
+      </div>
+    </div>
+
+    <div className="footer-links">
+      <h4>Quick Links</h4>
+      <a href="#hero">Home</a>
+      <Link to="/products">Products</Link>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div className="footer-platform">
+      <h4>Platform</h4>
+      <p>AI Fabric Intelligence</p>
+      <p>Secure Order Tracking</p>
+      <p>Modern UI Experience</p>
+      <p>Built with Firebase</p>
+    </div>
+
+  </div>
+
+  <div className="footer-bottom">
+    © 2026 TexTrack • Designed by Sravanthi Kondaviti
+  </div>
+</footer>
     </div>
   );
 }
