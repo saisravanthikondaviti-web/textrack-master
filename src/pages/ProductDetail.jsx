@@ -66,6 +66,7 @@ function ProductDetail() {
   alert("Added to Wishlist ❤️");
 };
 
+
   /* ---------- Modal UI ---------- */
   return (
     <div style={{
